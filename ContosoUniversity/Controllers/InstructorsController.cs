@@ -86,7 +86,7 @@ namespace ContosoUniversity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstMidName,HireData,LastName,OfficeAssignment")] Instructor instructor, string[] selectedCourses)
+        public async Task<IActionResult> Create([Bind("FirstMidName,HireDate,LastName,OfficeAssignment")] Instructor instructor, string[] selectedCourses)
         {
             if(selectedCourses != null)
             {
