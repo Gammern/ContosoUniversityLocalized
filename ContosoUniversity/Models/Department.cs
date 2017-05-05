@@ -23,7 +23,7 @@ namespace ContosoUniversity.Models
 
         public int? InstructorID { get; set; }
 
-        [Timestamp]
+        [Timestamp, Display(AutoGenerateFilter = false)]
         public byte[] RowVersion { get; set; }
 
         public Instructor Administrator { get; set; }
