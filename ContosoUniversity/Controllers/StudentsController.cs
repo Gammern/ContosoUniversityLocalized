@@ -29,8 +29,8 @@ namespace ContosoUniversity.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParam"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "LastName_desc" : "";
+            ViewData["DateSortParam"] = sortOrder == "EnrollmentDate" ? "EnrollmentDate_desc" : "EnrollmentDate";
 
             if (searchString != null)
             {
@@ -43,27 +43,35 @@ namespace ContosoUniversity.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var students = from s in _context.Students select s;
+            var students = from s in _context.Students
+                           select s;
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 students = students.Where(s => s.LastName.Contains(searchString) || s.FirstMidName.Contains(searchString));
             }
 
-            switch (sortOrder)
+            if (string.IsNullOrEmpty(sortOrder))
             {
-                case "name_desc":
-                    students = students.OrderByDescending(s => s.LastName);
-                    break;
-                case "Date":
-                    students = students.OrderBy(s => s.EnrollmentDate);
-                    break;
-                case "date_desc":
-                    students = students.OrderByDescending(s => s.EnrollmentDate);
-                    break;
-                default:
-                    students = students.OrderBy(s => s.LastName);
-                    break;
+                sortOrder = "LastName";
             }
+
+            bool desceding = false;
+            if (sortOrder.EndsWith("_desc"))
+            {
+                sortOrder = sortOrder.Substring(0, sortOrder.Length - 5);
+                desceding = true;
+            }
+
+            if (desceding)
+            {
+                students = students.OrderByDescending(e => EF.Property<object>(e, sortOrder));
+            }
+            else
+            {
+                students = students.OrderBy(e => EF.Property<object>(e, sortOrder));
+            }
+
             int pageSize = 3;
             return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), page ?? 1, pageSize));
         }

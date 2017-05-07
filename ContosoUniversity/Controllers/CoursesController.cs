@@ -152,10 +152,10 @@ namespace ContosoUniversity.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool CourseExists(int id)
-        {
-            return _context.Courses.Any(e => e.CourseID == id);
-        }
+        //private bool CourseExists(int id)
+        //{
+        //    return _context.Courses.Any(e => e.CourseID == id);
+        //}
 
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
@@ -163,6 +163,23 @@ namespace ContosoUniversity.Controllers
                                    orderby d.Name
                                    select d;
             ViewBag.DepartmentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
+        }
+
+        public IActionResult UpdateCourseCredits()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCourseCredits(int? multiplier)
+        {
+            if (multiplier != null)
+            {
+                ViewData["RowsAffected"] = await _context.Database.ExecuteSqlCommandAsync(
+                    "UPDATE Course SET Credits = Credits * {0}",
+                    parameters: multiplier);
+            }
+            return View();
         }
     }
 }
