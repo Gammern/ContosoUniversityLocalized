@@ -36,12 +36,11 @@ namespace ContosoUniversity
         {
             Action<LocalizationOptions> locOptsAction = opts => { opts.ResourcesPath = "Resources"; };
 
-            // add localisation service
-            services.AddLocalization(locOptsAction);
-
             services.AddDbContext<SchoolContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            // add localisation service
+            services.AddLocalization(locOptsAction);
 
             // Add framework services.
             services.AddMvc()
@@ -58,6 +57,8 @@ namespace ContosoUniversity
                 opts.DefaultRequestCulture = new RequestCulture("en-US");
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;
+                opts.RequestCultureProviders.Clear();
+                opts.RequestCultureProviders.Add(new CookieRequestCultureProvider());
             });
         }
 
@@ -90,7 +91,7 @@ namespace ContosoUniversity
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //DbInitializer.Initialize(context);
+            DbInitializer.Initialize(context);
         }
     }
 }
