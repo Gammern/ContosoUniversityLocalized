@@ -31,6 +31,13 @@
     <EmbeddedResource Update="Resources\Views\Home\Contact.no.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Shared\_Layout.no.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Shared\_SelectLanguagePartial.no.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_SelectLanguagePartial.no.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

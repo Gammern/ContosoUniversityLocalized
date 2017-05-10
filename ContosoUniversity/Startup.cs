@@ -44,7 +44,7 @@ namespace ContosoUniversity
 
             // Add framework services.
             services.AddMvc()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix, locOptsAction)
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.SubFolder, locOptsAction)
                 .AddDataAnnotationsLocalization();
 
             services.Configure<RequestLocalizationOptions>(opts =>

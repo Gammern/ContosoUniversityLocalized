@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
+using Microsoft.Extensions.Localization;
 
 namespace ContosoUniversity.Controllers
 {
@@ -16,11 +17,12 @@ namespace ContosoUniversity.Controllers
         private readonly string _saveErrorMessage = "Unable to save changes. " +
             "Try again, and if the problem persists " +
             "see your system administrator.";
+        private readonly IStringLocalizer<CoursesController> _localizer;
 
-
-        public CoursesController(SchoolContext context)
+        public CoursesController(SchoolContext context, IStringLocalizer<CoursesController> localizer)
         {
-            _context = context;    
+            _context = context;
+            _localizer = localizer;
         }
 
         // GET: Courses

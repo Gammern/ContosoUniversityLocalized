@@ -70,8 +70,6 @@ namespace ContosoUniversity.Controllers
 
         public IActionResult Contact()
         {
-            string temp = _localizer["Your contact page."];
-            
             ViewData["Message"] = _localizer["Your contact page."]; // change the text within the brackets, and the whole localization system breaks down. :-(
 
             return View();
