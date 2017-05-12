@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
+using Microsoft.Extensions.Localization;
 
 namespace ContosoUniversity.Controllers
 {
@@ -19,7 +20,6 @@ namespace ContosoUniversity.Controllers
                                 + "edit operation was canceled and the current values in the database "
                                 + "have been displayed. If you still want to edit this record, click "
                                 + "the Save button again. Otherwise click the Back to List hyperlink.";
-        private readonly string _currentValueLabel = "Current value";
         private readonly string _concurrencyDeleteErrorMessage = "The record you attempted to delete "
                     + "was modified by another user after you got the original values. "
                     + "The delete operation was canceled and the current values in the "
@@ -27,9 +27,14 @@ namespace ContosoUniversity.Controllers
                     + "record, click the Delete button again. Otherwise "
                     + "click the Back to List hyperlink.";
 
-        public DepartmentsController(SchoolContext context)
+        private readonly string _currentValueLabel;
+        private readonly IStringLocalizer<DepartmentsController> _localizer;
+
+        public DepartmentsController(SchoolContext context, IStringLocalizer<DepartmentsController> localizer)
         {
-            _context = context;    
+            _context = context;
+            _localizer = localizer;
+            _currentValueLabel = _localizer["Current value"];
         }
 
         // GET: Departments
