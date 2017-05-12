@@ -117,19 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Enrollment Date" xml:space="preserve">
-    <value>Immatrikuleringsdato</value>
+  <data name="Back to list" xml:space="preserve">
+    <value>Tilbake til liste</value>
   </data>
-  <data name="Enrollments" xml:space="preserve">
-    <value>Registrerte kurs</value>
+  <data name="Create New" xml:space="preserve">
+    <value>Opprett ny</value>
   </data>
-  <data name="First Name" xml:space="preserve">
-    <value>Fornavn</value>
+  <data name="Delete" xml:space="preserve">
+    <value>Slett</value>
   </data>
-  <data name="First name cannot be longer than 50 characters." xml:space="preserve">
-    <value>Fornavn kan ikke være lenger enn 50 tegn.</value>
+  <data name="Details" xml:space="preserve">
+    <value>Detaljer</value>
   </data>
-  <data name="Last Name" xml:space="preserve">
-    <value>Etternavn</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Rediger</value>
+  </data>
+  <data name="Find by name:" xml:space="preserve">
+    <value>Søk på navn:</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Hovedsiden</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Neste</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Forrige</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Søk</value>
   </data>
 </root>
