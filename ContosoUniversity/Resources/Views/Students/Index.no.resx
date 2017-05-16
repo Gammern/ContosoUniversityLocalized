@@ -135,9 +135,6 @@
   <data name="Find by name:" xml:space="preserve">
     <value>Søk på navn:</value>
   </data>
-  <data name="Index" xml:space="preserve">
-    <value>Hovedsiden</value>
-  </data>
   <data name="Next" xml:space="preserve">
     <value>Neste</value>
   </data>
@@ -146,5 +143,8 @@
   </data>
   <data name="Search" xml:space="preserve">
     <value>Søk</value>
+  </data>
+  <data name="Students" xml:space="preserve">
+    <value>Studenter</value>
   </data>
 </root>

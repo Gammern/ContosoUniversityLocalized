@@ -1,14 +1,15 @@
 @model ContosoUniversity.Models.Course
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localize
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = Localize["Create"];
 }
 
-<h2>Create</h2>
+<h2>@Localize["Create"]</h2>
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>Course</h4>
+        <h4>@Localize["Course"]</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -36,21 +37,21 @@
             <label asp-for="Department" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="DepartmentID" class ="form-control" asp-items="ViewBag.DepartmentID">
-                    <option value="">--Select Department --</option>
+                    <option value="">@Localize["--Select Department --"]</option>
                 </select>
                 <span asp-validation-for="DepartmentID" class="danger"/>
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="@Localize["Create"]" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localize["Back to List"]</a>
 </div>
 
 @section Scripts {

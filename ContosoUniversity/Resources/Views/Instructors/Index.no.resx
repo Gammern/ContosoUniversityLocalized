@@ -117,22 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About" xml:space="preserve">
-    <value>Om</value>
-  </data>
   <data name="Courses" xml:space="preserve">
     <value>Kurs</value>
   </data>
-  <data name="Departments" xml:space="preserve">
-    <value>Fakulteter</value>
+  <data name="Courses Taught by Selected Instructor" xml:space="preserve">
+    <value>Kurs som holdes av valgt foreleser</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>Hjem</value>
+  <data name="Create New" xml:space="preserve">
+    <value>Opprett ny</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Slett</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Fakultet</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detaljer</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Rediger</value>
+  </data>
+  <data name="First Name" xml:space="preserve">
+    <value>Fornavn</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>Karakter</value>
+  </data>
+  <data name="Hire Date" xml:space="preserve">
+    <value>Ansattdato</value>
   </data>
   <data name="Instructors" xml:space="preserve">
     <value>Forelesere</value>
   </data>
-  <data name="Students" xml:space="preserve">
-    <value>Studenter</value>
+  <data name="Last Name" xml:space="preserve">
+    <value>Etternavn</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Navn</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>Lokalisering</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Velg</value>
+  </data>
+  <data name="Students Enrolled in Selected Course" xml:space="preserve">
+    <value>Studenter som tar valgt kurs</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Tittel</value>
   </data>
 </root>

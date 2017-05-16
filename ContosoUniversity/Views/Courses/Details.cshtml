@@ -1,13 +1,15 @@
+@using Microsoft.AspNetCore.Mvc.Localization
 @model ContosoUniversity.Models.Course
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Localizer["Details"];
 }
 
-<h2>Details</h2>
+<h2>@Localizer["Details"]</h2>
 
 <div>
-    <h4>Course</h4>
+    <h4>@Localizer["Course"]</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,6 +39,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CourseID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.CourseID">@Localizer["Edit"]</a> |
+    <a asp-action="Index">@Localizer["Back to List"]</a>
 </div>
