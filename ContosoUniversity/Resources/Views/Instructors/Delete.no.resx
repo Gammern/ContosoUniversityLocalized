@@ -123,10 +123,10 @@
   <data name="Back to List" xml:space="preserve">
     <value>Tilbake til liste</value>
   </data>
-  <data name="Course" xml:space="preserve">
-    <value>Kurs</value>
-  </data>
   <data name="Delete" xml:space="preserve">
     <value>Slett</value>
+  </data>
+  <data name="Instructor" xml:space="preserve">
+    <value>Foreleser</value>
   </data>
 </root>

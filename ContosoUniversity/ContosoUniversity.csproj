@@ -25,13 +25,6 @@
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Resources\Models\Department.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Department.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Update="Resources\Controllers\DepartmentController.no.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
@@ -42,9 +35,11 @@
     <EmbeddedResource Update="Resources\Models\Course.no.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Models\Department.resx">
+    <EmbeddedResource Update="Resources\Models\Department.no.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Department.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\OfficeAssignment.no.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Models\Person.no.resx">
       <Generator>ResXFileCodeGenerator</Generator>
