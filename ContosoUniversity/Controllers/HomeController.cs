@@ -1,7 +1,11 @@
 ﻿using ContosoUniversity.Data;
 using ContosoUniversity.Models.SchoolViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
@@ -12,10 +16,12 @@ namespace ContosoUniversity.Controllers
     public class HomeController : Controller
     {
         private readonly SchoolContext _context;
+        private readonly IStringLocalizer<HomeController> _localizer;
 
-        public HomeController(SchoolContext context)
+        public HomeController(SchoolContext context, IStringLocalizer<HomeController> localizer)
         {
             _context = context;
+            _localizer = localizer;
         }
 
         public IActionResult Index()
@@ -64,9 +70,21 @@ namespace ContosoUniversity.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = _localizer["Your contact page."]; // change the text within the brackets, and the whole localization system breaks down. :-(
 
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
 
         public IActionResult Error()

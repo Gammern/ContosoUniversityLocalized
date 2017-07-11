@@ -1,22 +1,23 @@
 @model ContosoUniversity.Models.SchoolViewModels.InstructorIndexData
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localize
 
 @{
-    ViewData["Title"] = "Instructors";
+    ViewData["Title"] = Localize["Instructors"];
 }
 
-<h2>Instructors</h2>
+<h2>@Localize["Instructors"]</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@Localize["Create New"]</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Hire Date</th>
-            <th>Office</th>
-            <th>Courses</th>
+            <th>@Localize["Last Name"]</th>
+            <th>@Localize["First Name"]</th>
+            <th>@Localize["Hire Date"]</th>
+            <th>@Localize["Office"]</th>
+            <th>@Localize["Courses"]</th>
             <th></th>
         </tr>
     </thead>
@@ -53,10 +54,10 @@
                     }
                 </td>
                 <td>
-                    <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-action="Index" asp-route-id="@item.ID">@Localize["Select"]</a> |
+                    <a asp-action="Edit" asp-route-id="@item.ID">@Localize["Edit"]</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">@Localize["Details"]</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">@Localize["Delete"]</a>
                 </td>
             </tr>
                         }
@@ -65,13 +66,13 @@
 
 @if (Model.Courses != null)
 {
-    <h3>Courses Taught by Selected Instructor</h3>
+    <h3>@Localize["Courses Taught by Selected Instructor"]</h3>
     <table class="table">
         <tr>
             <th></th>
-            <th>Number</th>
-            <th>Title</th>
-            <th>Department</th>
+            <th>@Localize["Number"]</th>
+            <th>@Localize["Title"]</th>
+            <th>@Localize["Department"]</th>
         </tr>
 
         @foreach (var item in Model.Courses)
@@ -83,7 +84,7 @@
             }
             <tr class="@selectedRow">
                 <td>
-                    @Html.ActionLink("Select", "Index", new { courseID = item.CourseID })
+                    @Html.ActionLink(Localize["Select"].Value, "Index", new { courseID = item.CourseID })
                 </td>
                 <td>
                     @item.CourseID
@@ -103,12 +104,12 @@
 @if (Model.Enrollments != null)
 {
     <h3>
-        Students Enrolled in Selected Course
+        @Localize["Students Enrolled in Selected Course"]
     </h3>
     <table class="table">
         <tr>
-            <th>Name</th>
-            <th>Grade</th>
+            <th>@Localize["Name"]</th>
+            <th>@Localize["Grade"]</th>
         </tr>
         @foreach (var item in Model.Enrollments)
         {

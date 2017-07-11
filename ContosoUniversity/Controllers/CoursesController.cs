@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ContosoUniversity.Data;
+using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ContosoUniversity.Data;
-using ContosoUniversity.Models;
+using Microsoft.Extensions.Localization;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ContosoUniversity.Controllers
 {
@@ -16,11 +15,12 @@ namespace ContosoUniversity.Controllers
         private readonly string _saveErrorMessage = "Unable to save changes. " +
             "Try again, and if the problem persists " +
             "see your system administrator.";
+        private readonly IStringLocalizer<CoursesController> _localizer;
 
-
-        public CoursesController(SchoolContext context)
+        public CoursesController(SchoolContext context, IStringLocalizer<CoursesController> localizer)
         {
-            _context = context;    
+            _context = context;
+            _localizer = localizer;
         }
 
         // GET: Courses
@@ -52,9 +52,9 @@ namespace ContosoUniversity.Controllers
             return View(course);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            PopulateDepartmentsDropDownList();
+            await PopulateDepartmentsDropDownListAsync();
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace ContosoUniversity.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
+            await PopulateDepartmentsDropDownListAsync(course.DepartmentID);
             return View(course);
         }
 
@@ -86,7 +86,7 @@ namespace ContosoUniversity.Controllers
             {
                 return NotFound();
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
+            await PopulateDepartmentsDropDownListAsync(course.DepartmentID);
             return View(course);
         }
 
@@ -117,7 +117,7 @@ namespace ContosoUniversity.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            PopulateDepartmentsDropDownList(courseToUpdate.DepartmentID);
+            await PopulateDepartmentsDropDownListAsync(courseToUpdate.DepartmentID);
             return View(courseToUpdate);
         }
 
@@ -152,17 +152,12 @@ namespace ContosoUniversity.Controllers
             return RedirectToAction("Index");
         }
 
-        //private bool CourseExists(int id)
-        //{
-        //    return _context.Courses.Any(e => e.CourseID == id);
-        //}
-
-        private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
+        private async Task PopulateDepartmentsDropDownListAsync(object selectedDepartment = null)
         {
             var departmentsQuery = from d in _context.Departments
                                    orderby d.Name
                                    select d;
-            ViewBag.DepartmentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
+            ViewBag.DepartmentID = new SelectList(await departmentsQuery.AsNoTracking().ToListAsync(), "DepartmentID", "Name", selectedDepartment);
         }
 
         public IActionResult UpdateCourseCredits()

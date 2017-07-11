@@ -1,13 +1,14 @@
 @model ContosoUniversity.Models.Department
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localize
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Localize["Details"];
 }
 
-<h2>Details</h2>
+<h2>@Localize["Details"]</h2>
 
 <div>
-    <h4>Department</h4>
+    <h4>@Localize["Department"]</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,6 +38,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.DepartmentID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.DepartmentID">@Localize["Edit"]</a> |
+    <a asp-action="Index">@Localize["Back to List"]</a>
 </div>

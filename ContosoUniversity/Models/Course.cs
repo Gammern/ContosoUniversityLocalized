@@ -11,13 +11,15 @@ namespace ContosoUniversity.Models
         public int CourseID { get; set; }
 
         [StringLength(50, MinimumLength = 3)]
+        [Display(Name = "Title")]
         public string Title { get; set; }
 
-        [Range(0, 5)]
+        [Range(0, 5), Display(Name = "Credits")]
         public int Credits { get; set; }
 
         public int DepartmentID { get; set; }
 
+        [Display(Name = "Department")]
         public Department Department { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }
         public ICollection<CourseAssignment> CourseAssignments { get; set; }

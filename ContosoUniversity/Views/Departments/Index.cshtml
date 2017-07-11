@@ -1,13 +1,14 @@
 @model IEnumerable<ContosoUniversity.Models.Department>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localize
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = Localize["Departments"];
 }
 
-<h2>Index</h2>
+<h2>@Localize["Departments"]</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@Localize["Create New"]</a>
 </p>
 <table class="table">
     <thead>
@@ -43,9 +44,9 @@
                 @Html.DisplayFor(modelItem => item.Administrator.FullName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DepartmentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DepartmentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DepartmentID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.DepartmentID">@Localize["Edit"]</a> |
+                <a asp-action="Details" asp-route-id="@item.DepartmentID">@Localize["Details"]</a> |
+                <a asp-action="Delete" asp-route-id="@item.DepartmentID">@Localize["Delete"]</a>
             </td>
         </tr>
 }

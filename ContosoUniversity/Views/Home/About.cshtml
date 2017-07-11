@@ -1,14 +1,16 @@
-﻿@model IEnumerable<ContosoUniversity.Models.SchoolViewModels.EnrollmentDateGroup>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model IEnumerable<ContosoUniversity.Models.SchoolViewModels.EnrollmentDateGroup>
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Student body statistics";
+    ViewData["Title"] = Localizer["Student body statistics"];
 }
 <h2>@ViewData["Title"].</h2>
 
 <table>
     <tr>
-        <th>Enrolment Date</th>
-        <th>Sudents</th>
+        <th>@Localizer["Enrolment Date"]</th>
+        <th>@Localizer["Students"]</th>
     </tr>
     @foreach (var item in Model)
     {

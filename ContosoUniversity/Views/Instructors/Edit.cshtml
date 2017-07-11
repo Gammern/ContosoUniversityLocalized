@@ -1,14 +1,15 @@
 @model ContosoUniversity.Models.Instructor
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localize
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = Localize["Edit"];
 }
 
-<h2>Edit</h2>
+<h2>@Localize["Edit"]</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Instructor</h4>
+        <h4>@Localize["Instructor"]</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ID" />
@@ -71,14 +72,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="@Localize["Save"]" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localize["Back to List"]</a>
 </div>
 
 @section Scripts {

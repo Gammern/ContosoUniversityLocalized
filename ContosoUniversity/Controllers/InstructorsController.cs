@@ -88,7 +88,7 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FirstMidName,HireDate,LastName,OfficeAssignment")] Instructor instructor, string[] selectedCourses)
         {
-            if(selectedCourses != null)
+            if (selectedCourses != null)
             {
                 instructor.CourseAssignments = new List<CourseAssignment>();
                 foreach (var course in selectedCourses)
@@ -103,6 +103,7 @@ namespace ContosoUniversity.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            await PopulateAssignedCourseData(instructor);
             return View(instructor);
         }
 
@@ -141,8 +142,9 @@ namespace ContosoUniversity.Controllers
 
             var instructorToUpdate = await _context.Instructors
                 .Include(i => i.OfficeAssignment)
-                .Include(i => i.CourseAssignments).ThenInclude(i => i.Course)
-                .SingleOrDefaultAsync(s => s.ID == id);
+                .Include(i => i.CourseAssignments)
+                    .ThenInclude(i => i.Course)
+                .SingleOrDefaultAsync(m => m.ID == id);
 
             if (await TryUpdateModelAsync<Instructor>(
                 instructorToUpdate,
@@ -165,6 +167,8 @@ namespace ContosoUniversity.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            UpdateInstructorCourses(selectedCourses, instructorToUpdate);
+            await PopulateAssignedCourseData(instructorToUpdate);
             return View(instructorToUpdate);
         }
 
@@ -193,7 +197,7 @@ namespace ContosoUniversity.Controllers
         {
             var instructor = await _context.Instructors
                 .Include(i => i.CourseAssignments)
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleAsync(i => i.ID == id);
 
             var departments = await _context.Departments
                 .Where(d => d.InstructorID == id)
@@ -213,8 +217,8 @@ namespace ContosoUniversity.Controllers
 
         private async Task PopulateAssignedCourseData(Instructor instructor)
         {
-            var allCourses = _context.Courses.AsNoTracking();
-            var instructorCourses = new HashSet<int>(instructor.CourseAssignments.Select(c => c.Course.CourseID));
+            var allCourses = _context.Courses;
+            var instructorCourses = new HashSet<int>(instructor.CourseAssignments.Select(c => c.CourseID));
             var viewModel = new List<AssignedCourseData>();
             foreach (var course in await allCourses.ToListAsync())
             {

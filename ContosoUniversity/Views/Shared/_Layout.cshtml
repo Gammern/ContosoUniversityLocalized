@@ -1,4 +1,7 @@
-﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@*@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet*@
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,14 +19,14 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    @Html.Raw(JavaScriptSnippet.FullScript)
+    @*@Html.Raw(JavaScriptSnippet.FullScript)*@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">"Toggle navigation"</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -32,12 +35,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Students" asp-action="">Students</a></li>
-                    <li><a asp-area="" asp-controller="Courses" asp-action="">Courses</a></li>
-                    <li><a asp-area="" asp-controller="Instructors" asp-action="">Instructors</a></li>
-                    <li><a asp-area="" asp-controller="Departments" asp-action="">Departments</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">@Localizer["About"]</a></li>
+                    <li><a asp-area="" asp-controller="Students" asp-action="">@Localizer["Students"]</a></li>
+                    <li><a asp-area="" asp-controller="Courses" asp-action="">@Localizer["Courses"]</a></li>
+                    <li><a asp-area="" asp-controller="Instructors" asp-action="">@Localizer["Instructors"]</a></li>
+                    <li><a asp-area="" asp-controller="Departments" asp-action="">@Localizer["Departments"]</a></li>
                 </ul>
             </div>
         </div>
@@ -46,8 +49,15 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - Contoso University</p>
-        </footer>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>&copy; 2017 - Contoso University</p>
+                </div>
+                <div class="col-sm-6 text-right">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
+            </div>
+        </footer> 
     </div>
 
     <environment names="Development">

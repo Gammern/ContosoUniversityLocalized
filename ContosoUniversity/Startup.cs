@@ -9,6 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ContosoUniversity.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Localization;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 namespace ContosoUniversity
 {
@@ -29,10 +34,32 @@ namespace ContosoUniversity
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Action<LocalizationOptions> locOptsAction = opts => { opts.ResourcesPath = "Resources"; };
+
             services.AddDbContext<SchoolContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // add localisation service
+            services.AddLocalization(locOptsAction);
+
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.SubFolder, locOptsAction)
+                .AddDataAnnotationsLocalization();
+
+            services.Configure<RequestLocalizationOptions>(opts =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("no")
+                };
+                opts.DefaultRequestCulture = new RequestCulture("en-US");
+                opts.SupportedCultures = supportedCultures;
+                opts.SupportedUICultures = supportedCultures;
+                opts.RequestCultureProviders.Clear();
+                opts.RequestCultureProviders.Add(new CookieRequestCultureProvider());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +80,9 @@ namespace ContosoUniversity
             }
 
             app.UseStaticFiles();
+
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value); // please tell me why it downt work!!!!!!!!!!!!!!!! Dont silently ignore it. Force Exception
 
             app.UseMvc(routes =>
             {
