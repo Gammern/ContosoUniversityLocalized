@@ -8,14 +8,13 @@ using ContosoUniversity.Data;
 namespace ContosoUniversity.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20170505084748_Inheritance")]
-    partial class Inheritance
+    [Migration("20170713063001_RestartedFirstMigration")]
+    partial class RestartedFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.1")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "1.1.2");
 
             modelBuilder.Entity("ContosoUniversity.Models.Course", b =>
                 {

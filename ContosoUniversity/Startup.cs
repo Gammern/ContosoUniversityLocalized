@@ -37,7 +37,7 @@ namespace ContosoUniversity
             Action<LocalizationOptions> locOptsAction = opts => { opts.ResourcesPath = "Resources"; };
 
             services.AddDbContext<SchoolContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             // add localisation service
             services.AddLocalization(locOptsAction);
